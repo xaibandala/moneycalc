@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>Basic Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+  <!-- ✅ Navbar with dropdown + theme switch -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">💰 Money Tools by Xai</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="featureDropdown" role="button" data-bs-toggle="dropdown">
+              Tools
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="index.html">Percentage Identifier</a></li>
+              <li><a class="dropdown-item active" href="basic-calculator.html">Basic Calculator</a></li>
+            </ul>
+          </li>
+          <!-- 🌗 Dark/Light Mode Toggle -->
+          <li class="nav-item ms-3">
+            <div class="form-check form-switch text-white">
+              <input class="form-check-input" type="checkbox" id="themeSwitch">
+              <label class="form-check-label" for="themeSwitch">Dark Mode</label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🧮 Basic Calculator -->
+  <div class="container mt-5">
+    <div class="card shadow rounded-4 p-4">
+      <h2 class="text-center text-primary mb-4">🧮 Basic Calculator</h2>
+
+      <form>
+        <div class="mb-3">
+          <label class="form-label">First Number:</label>
+          <input type="number" step="any" class="form-control" id="num1" placeholder="e.g. 10">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Second Number:</label>
+          <input type="number" step="any" class="form-control" id="num2" placeholder="e.g. 5">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Operation:</label>
+          <select class="form-select" id="operation">
+            <option value="add">Add (+)</option>
+            <option value="subtract">Subtract (−)</option>
+            <option value="multiply">Multiply (×)</option>
+            <option value="divide">Divide (÷)</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn btn-success w-100" onclick="calculate()">Calculate</button>
+      </form>
+
+      <div id="result" class="mt-4" style="display: none;">
+        <div class="alert alert-info text-center">
+          <strong id="output"></strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap & Theme Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // 🌓 Theme toggle with localStorage
+    const html = document.documentElement;
+    const switchInput = document.getElementById("themeSwitch");
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      html.setAttribute("data-bs-theme", savedTheme);
+      switchInput.checked = savedTheme === "dark";
+    }
+
+    switchInput.addEventListener("change", () => {
+      const newTheme = switchInput.checked ? "dark" : "light";
+      html.setAttribute("data-bs-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    });
+  </script>
+
+  <!-- 📊 Calculator Logic -->
+  <script>
+    function calculate() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operation = document.getElementById("operation").value;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("Please enter valid numbers.");
+        return;
+      }
+
+      let result;
+      switch (operation) {
+        case "add":
+          result = num1 + num2;
+          break;
+        case "subtract":
+          result = num1 - num2;
+          break;
+        case "multiply":
+          result = num1 * num2;
+          break;
+        case "divide":
+          result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero";
+          break;
+      }
+
+      document.getElementById("output").innerText = `Result: ${result}`;
+      document.getElementById("result").style.display = "block";
+    }
+  </script>
+</body>
+</html>
