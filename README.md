@@ -57,3 +57,12 @@ Then open `http://localhost:8000/` in your browser.
 
 ## License
 This project is open-source. If you need a specific license (e.g., MIT), let me know and I’ll add it.
+
+DARK MODE
+
+![moneycalc](https://github.com/user-attachments/assets/7e2c3400-1f1a-4de2-9202-8edac06ac78f)
+
+LIGHT MODE
+
+![moneycalc2](https://github.com/user-attachments/assets/1f6b6931-3b85-4fb0-9de9-5ca4c5f95333)
+
